@@ -1,0 +1,79 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title>Nastavni Plan Predmet List</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" th:href="@{/css/home.css}" />
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<div class="container">
+		<div class="row d-inline-block">
+			<div class="col-md-2 btn-group">
+				<form th:action="@{/logout}" method="get">
+					<button class="btn btn-md btn-danger btn-block" name="registration"
+						type="Submit">Logout</button>
+				</form>
+			</div>
+			<div class="col-md-2 btn-group pull-right">
+				<form th:action="@{/predmet}" method="get">
+					<button class="btn btn-default btn-block" name="Back" type="Submit">Predmeti</button>
+				</form>
+			</div>
+		</div>
+		<div>
+			<h2 class="text-center">Lista Nastavnih planova</h2>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>Sifra <br> predmeta
+						</th>
+						<th>Ime predmeta</th>
+						<th>Ime plana</th>
+						<th>Razred</th>
+						<th>Nedeljno <br> nastave
+						</th>
+						<th>Nedeljno <br>vzbi
+						</th>
+						<th>Ukupno <br> nedelja
+						</th>
+						<th>Datum <br>usvajanja
+						</th>
+						<th>Izmeni</th>
+						<th>Obrisi</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="nastavniPlanPredmet : ${nastavniPlanPredmetList}">
+						<td th:utext=${nastavniPlanPredmet.predmet.sifra}>111</td>
+						<td th:utext=${nastavniPlanPredmet.predmet.punNaziv}>111</td>
+						<td th:utext=${nastavniPlanPredmet.imePlana}>111</td>
+						<td th:utext=${nastavniPlanPredmet.razred}>aaaa</td>
+						<td th:utext=${nastavniPlanPredmet.nedeljnoNastave}>111</td>
+						<td th:utext=${nastavniPlanPredmet.nedeljnoVzbi}>aaaa</td>
+						<td th:utext=${nastavniPlanPredmet.ukupnoNedelja}>111</td>
+						<td th:utext=${nastavniPlanPredmet.godisnji_plan.datumUsvajanja}>111</td>
+						<td><a class="btn btn-xs btn-success btn-block"
+							th:href="${'/editNastavniPlanPredmet/' + nastavniPlanPredmet.id}"
+							th:value="${nastavniPlanPredmet.id}">Edit</a></td>
+						<td><a class="btn btn-xs btn-danger btn-block"
+							th:href="${'/deleteNastavniPlanPredmet/' + nastavniPlanPredmet.id}"
+							th:value="${nastavniPlanPredmet.id}">Delete</a></td>
+					</tr>
+				</tbody>
+			</table>
+			<form th:action="@{/addNastavniPlanPredmet}" method="get">
+				<button class="btn btn-primary" type="Submit">Dodaj novi
+					nastavni plan</button>
+			</form>
+		</div>
+	</div>
+</body>
+</html>

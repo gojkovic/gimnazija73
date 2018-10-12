@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Nastavni Plan Predmet Form</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css"
+	th:href="@{/css/registration.css}" />
+</head>
+
+<body>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-8 col-sm-offset-2">
+				<div class="col-sm-8 col-sm-offset-2">
+					<form th:action="@{/logout}" method="get">
+						<button class="btn btn-md btn-danger btn-block" name="logout"
+							type="Submit">Logout</button>
+					</form>
+				</div>
+				<div class="col-sm-8 col-sm-offset-2">
+					<form th:action="@{/nastavni_plan_predmet}" method="get">
+						<button class="btn btn-md btn-default btn-block" name="Back"
+							type="Submit">Lista Nastavnih planova</button>
+					</form>
+				</div>
+				<form autocomplete="off" action="#"
+					th:action="@{/saveNastavniPlanPredmet}"
+					th:object="${nastavniPlanPredmetForm}" method="post"
+					class="form-horizontal" role="form">
+					<div class="col-sm-6 col-sm-offset-3">
+						<h2 class="text-center">Nastavni Plan Predmet Form</h2>
+					</div>
+
+					<div class="form-group">
+						<input type="hidden" th:field="*{id}" />
+					</div>
+
+					<div class="form-group">
+						<div class="col-sm-8 col-sm-offset-2">
+							<label th:if="${#fields.hasErrors('imePlana')}"
+								th:errors="*{imePlana}" class="validation-message"></label> <input
+								type="text" th:field="*{imePlana}" placeholder="Ime Plana"
+								class="form-control" />
+						</div>
+					</div>
+
+					<div class="form-group">
+						<div class="col-sm-8 col-sm-offset-2">
+							<label th:if="${#fields.hasErrors('razred')}"
+								th:errors="*{razred}" class="validation-message"></label> <input
+								type="text" th:field="*{razred}" placeholder="Razred"
+								class="form-control" />
+						</div>
+					</div>
+
+					<div class="form-group">
+						<div class="col-sm-8 col-sm-offset-2">
+							<label th:if="${#fields.hasErrors('nedeljnoNastave')}"
+								th:errors="*{nedeljnoNastave}" class="validation-message"></label>
+							<input type="text" th:field="*{nedeljnoNastave}"
+								placeholder="Nedeljno Nastave" class="form-control" />
+						</div>
+					</div>
+
+					<div class="form-group">
+						<div class="col-sm-8 col-sm-offset-2">
+							<label th:if="${#fields.hasErrors('nedeljnoVzbi')}"
+								th:errors="*{nedeljnoVzbi}" class="validation-message"></label>
+							<input type="text" th:field="*{nedeljnoVzbi}"
+								placeholder="Nedeljno Vzbi" class="form-control" />
+						</div>
+					</div>
+
+					<div class="form-group">
+						<div class="col-sm-8 col-sm-offset-2">
+							<label th:if="${#fields.hasErrors('ukupnoNedelja')}"
+								th:errors="*{ukupnoNedelja}" class="validation-message"></label>
+							<input type="text" th:field="*{ukupnoNedelja}"
+								placeholder="Ukupno Nedelja" class="form-control" />
+						</div>
+					</div>
+
+					<div class="form-group row">
+						<div class="col-sm-4 col-sm-offset-2">
+							<select class="form-control" th:field="*{predmet}" id="predmet">
+								<option value="0">Izaberite predmet</option>
+								<option th:each="predmet : ${listPredmet}"
+									th:value="${predmet.id}" th:utext=${predmet.punNaziv}>1</option>
+							</select>
+						</div>
+						<div class="col-sm-4">
+							<a class="btn btn-md btn-primary btn-block"
+								th:href="${'/addPredmet'}">add Predmet</a>
+						</div>
+					</div>
+					
+					<div class="form-group row">
+						<div class="col-sm-4 col-sm-offset-2">
+							<select class="form-control" th:field="*{godisnji_plan}" id="godisnjiPlan">
+								<option value="0">Izaberite Godisnji Plan</option>
+								<option th:each="godisnjiPlan : ${listGodisnjiPlan}"
+									th:value="${godisnjiPlan.id}" th:utext=${godisnjiPlan.datumUsvajanja}>1</option>
+							</select>
+						</div>
+						<div class="col-sm-4">
+							<a class="btn btn-md btn-primary btn-block"
+								th:href="${'/addGodisnjiPlan'}">add Godisnji Plan</a>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<div class="col-sm-8 col-sm-offset-2">
+							<button type="submit" class="btn btn-success btn-block">Save</button>
+						</div>
+					</div>
+
+					<span th:utext="${successMessage}"></span>
+
+				</form>
+
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

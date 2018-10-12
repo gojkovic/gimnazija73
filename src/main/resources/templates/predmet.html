@@ -1,0 +1,63 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title>Predmet List</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" th:href="@{/css/home.css}" />
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<div class="container">
+
+		<div class="row d-inline-block">
+			<div class="col-md-2 btn-group">
+				<form th:action="@{/logout}" method="get">
+					<button class="btn btn-md btn-danger btn-block" name="registration"
+						type="Submit">Logout</button>
+				</form>
+			</div>
+			<div class="col-md-2 btn-group pull-right">
+				<form th:action="@{/nastavni_plan_predmet}" method="get">
+					<button class="btn btn-default btn-block" name="Back" type="Submit">Nastavni Plan Predmet</button>
+				</form>
+			</div>
+		</div>
+
+		<h2>Lista Predmeta</h2>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Sifra</th>
+					<th>Pun Naziv</th>
+					<th>Edit</th>
+					<th>Delete</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="predmet : ${predmetList}">
+					<td th:utext=${predmet.sifra}>111</td>
+					<td th:utext=${predmet.punNaziv}>Prvi predmet</td>
+					<td><a class="btn btn-xs btn-success btn-block"
+						th:href="${'/editPredmet/' + predmet.id}"
+						th:value="${predmet.id}">Edit</a></td>
+					<td><a class="btn btn-xs btn-danger btn-block"
+						th:href="${'/deletePredmet/' + predmet.id}"
+						th:value="${predmet.id}">Delete</a></td>
+				</tr>
+			</tbody>
+		</table>
+		<form th:action="@{/addPredmet}" method="get">
+			<button class="btn btn-primary" type="Submit">Dodaj novi
+				predmet</button>
+		</form>
+
+	</div>
+</body>
+</html>

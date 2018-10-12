@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Skolska Godina Form</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css"
+	th:href="@{/css/registration.css}" />
+</head>
+
+<body>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-6 col-sm-offset-3">
+				<div class="col-sm-8 col-sm-offset-2">
+					<form th:action="@{/logout}" method="get">
+						<button class="btn btn-md btn-danger btn-block" name="logout"
+							type="Submit">Logout</button>
+					</form>
+				</div>
+				<div class="col-sm-8 col-sm-offset-2">
+					<form th:action="@{/addGodisnjiPlan}" method="get">
+						<button class="btn btn-md btn-default btn-block" name="predmet"
+							type="Submit">Godisnji Plan Form</button>
+					</form>
+				</div>
+
+				<form autocomplete="off" action="#"
+					th:action="@{/saveSkolskaGodina}" th:object="${skolskaGodinaForm}"
+					method="post" class="form-horizontal" role="form">
+					<div class="col-sm-6 col-sm-offset-3">
+						<h2 class="text-center">Skolska Godina Form</h2>
+					</div>
+
+					<div class="form-group">
+						<input type="hidden" th:field="*{id}" />
+					</div>
+
+					<div class="form-group">
+
+						<div class="col-sm-8 col-sm-offset-2">
+							<label>Datum pocetka</label> <label
+								th:if="${#fields.hasErrors('datumPocetk')}"
+								th:errors="*{datumPocetk}" class="validation-message"></label> <input
+								type="date" th:field="*{datumPocetk}"
+								placeholder="Datum pocetka" class="form-control" />
+						</div>
+					</div>
+
+					<div class="form-group">
+						<div class="col-sm-8 col-sm-offset-2">
+							<label th:if="${#fields.hasErrors('datumKraja')}"
+								th:errors="*{datumKraja}" class="validation-message"></label> <label>Datum
+								kraja</label> <input type="date" th:field="*{datumKraja}"
+								placeholder="Datum kraja" class="form-control" />
+						</div>
+					</div>
+
+					<div class="form-group">
+						<div class="col-sm-8 col-sm-offset-2">
+							<button type="submit" class="btn btn-primary btn-block">Save</button>
+						</div>
+					</div>
+
+					<span th:utext="${successMessage}"></span>
+
+				</form>
+
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>
